@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Material de apoyo para capacitación de picking y operación de bodega.">
+  <title>Capacitación Picking | Andrea Miranda</title>
+  <style>
+    :root{
+      --bg:#f6f7f9;
+      --panel:#ffffff;
+      --ink:#172033;
+      --muted:#667085;
+      --line:#e7eaf0;
+      --yellow:#ffe600;
+      --blue:#2d3277;
+      --blue-2:#4048a5;
+      --green:#16794a;
+      --shadow:0 18px 50px rgba(26,34,56,.10);
+      --radius:22px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      color:var(--ink);
+      background:var(--bg);
+      line-height:1.55;
+    }
+    a{color:inherit;text-decoration:none}
+    button{font:inherit}
+    .topbar{
+      background:var(--yellow);
+      color:#262626;
+      text-align:center;
+      font-size:.86rem;
+      font-weight:800;
+      letter-spacing:.04em;
+      padding:9px 18px;
+    }
+    header{
+      position:sticky;
+      top:0;
+      z-index:20;
+      backdrop-filter:blur(16px);
+      background:rgba(255,255,255,.91);
+      border-bottom:1px solid rgba(231,234,240,.85);
+    }
+    .nav{
+      width:min(1180px,calc(100% - 36px));
+      margin:auto;
+      min-height:72px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:24px;
+    }
+    .brand{display:flex;align-items:center;gap:12px}
+    .brand-mark{
+      width:42px;height:42px;border-radius:13px;
+      display:grid;place-items:center;
+      background:var(--blue);color:#fff;font-weight:900;
+      box-shadow:0 8px 24px rgba(45,50,119,.24);
+    }
+    .brand strong{display:block;font-size:.98rem}
+    .brand small{display:block;color:var(--muted);font-size:.74rem;margin-top:1px}
+    nav{display:flex;gap:22px;color:#3b4354;font-size:.9rem;font-weight:700}
+    nav a:hover{color:var(--blue)}
+    .nav-cta{padding:11px 16px;border-radius:12px;background:var(--blue);color:#fff;font-weight:800;font-size:.88rem}
+    main{overflow:hidden}
+    .hero{width:min(1180px,calc(100% - 36px));margin:48px auto 20px;display:grid;grid-template-columns:1.12fr .88fr;gap:28px;align-items:stretch}
+    .hero-copy{padding:56px;border-radius:30px;background:linear-gradient(145deg,#1f255d,#343b91);color:white;position:relative;overflow:hidden;box-shadow:var(--shadow)}
+    .hero-copy:after{content:"";position:absolute;width:300px;height:300px;border-radius:50%;background:var(--yellow);opacity:.12;right:-100px;top:-100px}
+    .eyebrow{margin:0 0 16px;color:#fff18a;font-size:.78rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
+    h1{font-size:clamp(2.7rem,6vw,5.5rem);line-height:.94;letter-spacing:-.055em;margin:0;max-width:760px}
+    .hero-copy .lead{max-width:650px;color:#e4e7ff;font-size:1.05rem;margin:24px 0 30px}
+    .hero-actions{display:flex;flex-wrap:wrap;gap:12px}
+    .button{display:inline-flex;align-items:center;justify-content:center;border-radius:14px;padding:13px 18px;font-weight:900;border:1px solid transparent}
+    .button.primary{background:var(--yellow);color:#242424}
+    .button.secondary{border-color:rgba(255,255,255,.34);color:#fff;background:rgba(255,255,255,.06)}
+    .hero-side{border-radius:30px;background:#fff;padding:28px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:15px}
+    .hero-side h2{font-size:1.25rem;margin:0}
+    .progress-card{padding:18px;border-radius:18px;background:#f8f9fc;border:1px solid var(--line)}
+    .progress-head{display:flex;justify-content:space-between;gap:14px;font-weight:800;font-size:.9rem}
+    .progress-track{height:8px;border-radius:999px;background:#e6e8f0;overflow:hidden;margin-top:12px}
+    .progress-track span{display:block;width:35%;height:100%;background:var(--blue)}
+    .mini-list{display:grid;gap:10px;margin-top:4px}
+    .mini-item{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+    .mini-item:last-child{border-bottom:0}
+    .mini-icon{width:34px;height:34px;border-radius:10px;background:#fff4a8;display:grid;place-items:center;flex:0 0 auto}
+    .mini-item strong{font-size:.92rem;display:block}
+    .mini-item small{color:var(--muted);display:block;margin-top:2px}
+    .section{width:min(1180px,calc(100% - 36px));margin:88px auto}
+    .section-head{display:flex;justify-content:space-between;align-items:end;gap:24px;margin-bottom:26px}
+    .section-head .tag{color:var(--blue);font-size:.78rem;font-weight:900;letter-spacing:.11em;text-transform:uppercase;margin:0 0 8px}
+    .section-head h2{font-size:clamp(2rem,4vw,3.4rem);letter-spacing:-.04em;line-height:1;margin:0}
+    .section-head p{max-width:520px;color:var(--muted);margin:0}
+    .module-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .module{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:24px;box-shadow:0 8px 28px rgba(26,34,56,.05);transition:.2s ease}
+    .module:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+    .module-num{width:42px;height:42px;border-radius:12px;background:var(--yellow);display:grid;place-items:center;font-weight:950;margin-bottom:22px}
+    .module h3{margin:0 0 8px;font-size:1.15rem}
+    .module p{color:var(--muted);margin:0 0 18px;font-size:.94rem}
+    .module a{font-weight:900;color:var(--blue);font-size:.9rem}
+    .two-col{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+    .panel{background:white;border:1px solid var(--line);border-radius:var(--radius);padding:28px}
+    .panel h3{margin:0 0 16px;font-size:1.35rem}
+    .checklist{display:grid;gap:12px}
+    .check{display:flex;gap:12px;align-items:flex-start;padding:13px 14px;border-radius:14px;background:#f8f9fb}
+    .check b{color:var(--green)}
+    .check span{color:#40485a;font-size:.94rem}
+    .mistakes{display:grid;gap:12px}
+    .mistake{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start;padding:15px;border:1px solid #f0e4e4;background:#fffafa;border-radius:14px}
+    .mistake strong{color:#a33d3d}
+    .material-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .material{background:white;border:1px solid var(--line);border-radius:18px;padding:20px;display:flex;flex-direction:column;min-height:180px}
+    .material .filetype{color:var(--blue);font-size:.75rem;font-weight:900;text-transform:uppercase;letter-spacing:.1em}
+    .material h3{margin:12px 0 8px}
+    .material p{color:var(--muted);font-size:.9rem;margin:0 0 18px}
+    .material a{margin-top:auto;font-weight:900;color:var(--blue)}
+    .notice{margin-top:20px;background:#fff9cf;border:1px solid #f0df6c;padding:16px 18px;border-radius:15px;color:#655b18;font-size:.9rem}
+    .cta{width:min(1180px,calc(100% - 36px));margin:88px auto;border-radius:28px;background:var(--yellow);padding:42px;display:flex;justify-content:space-between;align-items:center;gap:28px}
+    .cta h2{font-size:clamp(2rem,4vw,3rem);margin:0;letter-spacing:-.04em}
+    .cta p{margin:8px 0 0;color:#514d25;max-width:620px}
+    .cta .button{background:#242424;color:white}
+    footer{padding:34px 18px 46px;text-align:center;color:var(--muted);font-size:.84rem}
+    footer strong{color:var(--ink)}
+    .filter-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+    .filter{border:1px solid var(--line);background:white;border-radius:999px;padding:9px 13px;font-weight:800;color:#4e5668;cursor:pointer}
+    .filter.active{background:var(--blue);color:white;border-color:var(--blue)}
+    @media (max-width:900px){nav{display:none}.hero{grid-template-columns:1fr}.module-grid,.material-grid{grid-template-columns:1fr 1fr}.two-col{grid-template-columns:1fr}.hero-copy{padding:38px}.section-head{align-items:start;flex-direction:column}.cta{align-items:flex-start;flex-direction:column}}
+    @media (max-width:620px){.nav{width:min(100% - 22px,1180px)}.brand small{display:none}.nav-cta{font-size:.8rem;padding:10px 12px}.hero,.section,.cta{width:min(100% - 22px,1180px)}.hero{margin-top:24px}.hero-copy,.hero-side{border-radius:22px}.hero-copy{padding:30px 24px}.module-grid,.material-grid{grid-template-columns:1fr}.section{margin:62px auto}.cta{margin:62px auto;padding:28px 24px}}
+  </style>
+</head>
+<body>
+  <div class="topbar">MAQUETA PERSONAL · CAPACITACIÓN DE PICKING · NO OFICIAL</div>
+  <header><div class="nav"><a class="brand" href="#inicio"><span class="brand-mark">AM</span><span><strong>Andrea Miranda</strong><small>Material de capacitación</small></span></a><nav><a href="#modulos">Módulos</a><a href="#guia">Guía rápida</a><a href="#materiales">Materiales</a></nav><a class="nav-cta" href="#materiales">Ver material</a></div></header>
+  <main id="inicio">
+    <section class="hero"><div class="hero-copy"><p class="eyebrow">Picking · operación · calidad</p><h1>Aprender el proceso, paso a paso.</h1><p class="lead">Un espacio simple para reunir procedimientos, guías visuales, material de apoyo y buenas prácticas para capacitación de picking.</p><div class="hero-actions"><a class="button primary" href="#modulos">Comenzar capacitación</a><a class="button secondary" href="#guia">Ver guía rápida</a></div></div><aside class="hero-side"><h2>Ruta de aprendizaje</h2><div class="progress-card"><div class="progress-head"><span>Contenido preparado</span><strong>35%</strong></div><div class="progress-track"><span></span></div></div><div class="mini-list"><div class="mini-item"><div class="mini-icon">📍</div><div><strong>Ubicación y lectura</strong><small>Pasillo, módulo, nivel y posición.</small></div></div><div class="mini-item"><div class="mini-icon">📱</div><div><strong>Escaneo correcto</strong><small>Validación de producto y ubicación.</small></div></div><div class="mini-item"><div class="mini-icon">✅</div><div><strong>Calidad</strong><small>Evitar errores antes de confirmar.</small></div></div></div></aside></section>
+    <section class="section" id="modulos"><div class="section-head"><div><p class="tag">Capacitación</p><h2>Módulos principales</h2></div><p>La idea es que cada módulo pueda tener texto, imágenes, videos cortos, PDFs y preguntas de repaso.</p></div><div class="module-grid"><article class="module"><div class="module-num">01</div><h3>Introducción al picking</h3><p>Objetivo del proceso, flujo general y conceptos básicos antes de comenzar.</p><a href="#">Abrir módulo →</a></article><article class="module"><div class="module-num">02</div><h3>Ubicaciones</h3><p>Cómo interpretar calle/pasillo, módulo, nivel y posición de forma rápida.</p><a href="#">Abrir módulo →</a></article><article class="module"><div class="module-num">03</div><h3>Escaneo y validación</h3><p>Secuencia de lectura, verificación y confirmación para reducir errores.</p><a href="#">Abrir módulo →</a></article><article class="module"><div class="module-num">04</div><h3>Picking Single</h3><p>Flujo de una tarea individual con foco en orden, seguridad y exactitud.</p><a href="#">Abrir módulo →</a></article><article class="module"><div class="module-num">05</div><h3>Picking Multibatch</h3><p>Organización de múltiples pedidos y control para evitar mezclas.</p><a href="#">Abrir módulo →</a></article><article class="module"><div class="module-num">06</div><h3>Calidad y productividad</h3><p>Buenas prácticas para trabajar rápido sin sacrificar la precisión del proceso.</p><a href="#">Abrir módulo →</a></article></div></section>
+    <section class="section" id="guia"><div class="section-head"><div><p class="tag">Guía rápida</p><h2>Antes de confirmar un pick</h2></div><p>Esta sección puede funcionar como recordatorio breve para personas nuevas durante sus primeros días.</p></div><div class="two-col"><article class="panel"><h3>Checklist</h3><div class="checklist"><div class="check"><b>✓</b><span>Confirmar que estás en la ubicación indicada por el dispositivo.</span></div><div class="check"><b>✓</b><span>Comparar visualmente el producto antes de escanear.</span></div><div class="check"><b>✓</b><span>Revisar código, variante y cantidad solicitada.</span></div><div class="check"><b>✓</b><span>Mantener separados los pedidos cuando corresponde.</span></div><div class="check"><b>✓</b><span>Confirmar sólo cuando el producto correcto esté físicamente tomado.</span></div></div></article><article class="panel"><h3>Errores que queremos evitar</h3><div class="mistakes"><div class="mistake"><strong>01</strong><span>Escanear una ubicación cercana sin revisar la posición exacta.</span></div><div class="mistake"><strong>02</strong><span>Tomar una variante parecida por color, tamaño o presentación.</span></div><div class="mistake"><strong>03</strong><span>Confirmar en pantalla antes de tener el producto correcto.</span></div><div class="mistake"><strong>04</strong><span>Priorizar velocidad cuando existe una duda de calidad.</span></div></div></article></div></section>
+    <section class="section" id="materiales"><div class="section-head"><div><p class="tag">Biblioteca</p><h2>Material descargable</h2></div><p>Estos son ejemplos. Después podemos reemplazarlos por tus manuales, fotos, presentaciones o PDFs reales.</p></div><div class="filter-row"><button class="filter active" data-filter="all">Todo</button><button class="filter" data-filter="pdf">PDF</button><button class="filter" data-filter="visual">Guías visuales</button><button class="filter" data-filter="repaso">Repaso</button></div><div class="material-grid" id="material-grid"><article class="material" data-type="pdf"><span class="filetype">PDF</span><h3>Manual básico de picking</h3><p>Documento principal para explicar el flujo completo.</p><a href="#">Próximamente</a></article><article class="material" data-type="visual"><span class="filetype">Guía visual</span><h3>Cómo leer una ubicación</h3><p>Ejemplos gráficos con pasillo, módulo, nivel y posición.</p><a href="#">Próximamente</a></article><article class="material" data-type="repaso"><span class="filetype">Repaso</span><h3>Mini prueba: 5 preguntas</h3><p>Chequeo rápido de comprensión al terminar el módulo.</p><a href="#">Próximamente</a></article></div><div class="notice"><strong>Nota:</strong> esta maqueta está planteada como material de apoyo independiente. Antes de publicar documentos internos, procedimientos confidenciales, capturas de sistemas o información operativa sensible, conviene revisar qué material está autorizado para compartirse públicamente.</div></section>
+    <section class="cta"><div><h2>Esta es sólo la primera versión.</h2><p>Podemos transformarla en una plataforma más completa: buscador, módulos separados, videos, evaluaciones, certificados, acceso por contraseña o biblioteca de archivos.</p></div><a class="button" href="#modulos">Volver a módulos</a></section>
+  </main>
+  <footer><strong>Andrea Miranda · Capacitación de Picking</strong><br>Maqueta inicial para organizar material de aprendizaje.</footer>
+  <script>
+    const filters=document.querySelectorAll('.filter');const materials=document.querySelectorAll('.material');filters.forEach(btn=>{btn.addEventListener('click',()=>{filters.forEach(b=>b.classList.remove('active'));btn.classList.add('active');const type=btn.dataset.filter;materials.forEach(card=>{card.style.display=(type==='all'||card.dataset.type===type)?'flex':'none';});});});
+  </script>
+</body>
+</html>
