@@ -1,157 +1,56 @@
 <!doctype html>
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="Material de apoyo para capacitación de picking y operación de bodega.">
-  <title>Capacitación Picking | Andrea Miranda</title>
-  <style>
-    :root{
-      --bg:#f6f7f9;
-      --panel:#ffffff;
-      --ink:#172033;
-      --muted:#667085;
-      --line:#e7eaf0;
-      --yellow:#ffe600;
-      --blue:#2d3277;
-      --blue-2:#4048a5;
-      --green:#16794a;
-      --shadow:0 18px 50px rgba(26,34,56,.10);
-      --radius:22px;
-    }
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{
-      margin:0;
-      font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-      color:var(--ink);
-      background:var(--bg);
-      line-height:1.55;
-    }
-    a{color:inherit;text-decoration:none}
-    button{font:inherit}
-    .topbar{
-      background:var(--yellow);
-      color:#262626;
-      text-align:center;
-      font-size:.86rem;
-      font-weight:800;
-      letter-spacing:.04em;
-      padding:9px 18px;
-    }
-    header{
-      position:sticky;
-      top:0;
-      z-index:20;
-      backdrop-filter:blur(16px);
-      background:rgba(255,255,255,.91);
-      border-bottom:1px solid rgba(231,234,240,.85);
-    }
-    .nav{
-      width:min(1180px,calc(100% - 36px));
-      margin:auto;
-      min-height:72px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:24px;
-    }
-    .brand{display:flex;align-items:center;gap:12px}
-    .brand-mark{
-      width:42px;height:42px;border-radius:13px;
-      display:grid;place-items:center;
-      background:var(--blue);color:#fff;font-weight:900;
-      box-shadow:0 8px 24px rgba(45,50,119,.24);
-    }
-    .brand strong{display:block;font-size:.98rem}
-    .brand small{display:block;color:var(--muted);font-size:.74rem;margin-top:1px}
-    nav{display:flex;gap:22px;color:#3b4354;font-size:.9rem;font-weight:700}
-    nav a:hover{color:var(--blue)}
-    .nav-cta{padding:11px 16px;border-radius:12px;background:var(--blue);color:#fff;font-weight:800;font-size:.88rem}
-    main{overflow:hidden}
-    .hero{width:min(1180px,calc(100% - 36px));margin:48px auto 20px;display:grid;grid-template-columns:1.12fr .88fr;gap:28px;align-items:stretch}
-    .hero-copy{padding:56px;border-radius:30px;background:linear-gradient(145deg,#1f255d,#343b91);color:white;position:relative;overflow:hidden;box-shadow:var(--shadow)}
-    .hero-copy:after{content:"";position:absolute;width:300px;height:300px;border-radius:50%;background:var(--yellow);opacity:.12;right:-100px;top:-100px}
-    .eyebrow{margin:0 0 16px;color:#fff18a;font-size:.78rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
-    h1{font-size:clamp(2.7rem,6vw,5.5rem);line-height:.94;letter-spacing:-.055em;margin:0;max-width:760px}
-    .hero-copy .lead{max-width:650px;color:#e4e7ff;font-size:1.05rem;margin:24px 0 30px}
-    .hero-actions{display:flex;flex-wrap:wrap;gap:12px}
-    .button{display:inline-flex;align-items:center;justify-content:center;border-radius:14px;padding:13px 18px;font-weight:900;border:1px solid transparent}
-    .button.primary{background:var(--yellow);color:#242424}
-    .button.secondary{border-color:rgba(255,255,255,.34);color:#fff;background:rgba(255,255,255,.06)}
-    .hero-side{border-radius:30px;background:#fff;padding:28px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:15px}
-    .hero-side h2{font-size:1.25rem;margin:0}
-    .progress-card{padding:18px;border-radius:18px;background:#f8f9fc;border:1px solid var(--line)}
-    .progress-head{display:flex;justify-content:space-between;gap:14px;font-weight:800;font-size:.9rem}
-    .progress-track{height:8px;border-radius:999px;background:#e6e8f0;overflow:hidden;margin-top:12px}
-    .progress-track span{display:block;width:35%;height:100%;background:var(--blue)}
-    .mini-list{display:grid;gap:10px;margin-top:4px}
-    .mini-item{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
-    .mini-item:last-child{border-bottom:0}
-    .mini-icon{width:34px;height:34px;border-radius:10px;background:#fff4a8;display:grid;place-items:center;flex:0 0 auto}
-    .mini-item strong{font-size:.92rem;display:block}
-    .mini-item small{color:var(--muted);display:block;margin-top:2px}
-    .section{width:min(1180px,calc(100% - 36px));margin:88px auto}
-    .section-head{display:flex;justify-content:space-between;align-items:end;gap:24px;margin-bottom:26px}
-    .section-head .tag{color:var(--blue);font-size:.78rem;font-weight:900;letter-spacing:.11em;text-transform:uppercase;margin:0 0 8px}
-    .section-head h2{font-size:clamp(2rem,4vw,3.4rem);letter-spacing:-.04em;line-height:1;margin:0}
-    .section-head p{max-width:520px;color:var(--muted);margin:0}
-    .module-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-    .module{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:24px;box-shadow:0 8px 28px rgba(26,34,56,.05);transition:.2s ease}
-    .module:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
-    .module-num{width:42px;height:42px;border-radius:12px;background:var(--yellow);display:grid;place-items:center;font-weight:950;margin-bottom:22px}
-    .module h3{margin:0 0 8px;font-size:1.15rem}
-    .module p{color:var(--muted);margin:0 0 18px;font-size:.94rem}
-    .module a{font-weight:900;color:var(--blue);font-size:.9rem}
-    .priority-legend{display:flex;gap:8px;flex-wrap:wrap;margin:2px 0 18px}
-    .priority-chip{display:inline-flex;align-items:center;gap:6px;padding:6px 9px;border-radius:999px;background:#f7f7f8;font-size:.76rem;font-weight:850;color:#4c5362;border:1px solid var(--line)}
-    .priority-dot{width:9px;height:9px;border-radius:50%;display:inline-block}
-    .priority-dot.red{background:#d73d3d}
-    .priority-dot.orange{background:#f29a2e}
-    .priority-dot.green{background:#25a363}
-    .two-col{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-    .panel{background:white;border:1px solid var(--line);border-radius:var(--radius);padding:28px}
-    .panel h3{margin:0 0 16px;font-size:1.35rem}
-    .checklist{display:grid;gap:12px}
-    .check{display:flex;gap:12px;align-items:flex-start;padding:13px 14px;border-radius:14px;background:#f8f9fb}
-    .check b{color:var(--green)}
-    .check span{color:#40485a;font-size:.94rem}
-    .mistakes{display:grid;gap:12px}
-    .mistake{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start;padding:15px;border:1px solid #f0e4e4;background:#fffafa;border-radius:14px}
-    .mistake strong{color:#a33d3d}
-    .material-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-    .material{background:white;border:1px solid var(--line);border-radius:18px;padding:20px;display:flex;flex-direction:column;min-height:180px}
-    .material .filetype{color:var(--blue);font-size:.75rem;font-weight:900;text-transform:uppercase;letter-spacing:.1em}
-    .material h3{margin:12px 0 8px}
-    .material p{color:var(--muted);font-size:.9rem;margin:0 0 18px}
-    .material a{margin-top:auto;font-weight:900;color:var(--blue)}
-    .notice{margin-top:20px;background:#fff9cf;border:1px solid #f0df6c;padding:16px 18px;border-radius:15px;color:#655b18;font-size:.9rem}
-    .cta{width:min(1180px,calc(100% - 36px));margin:88px auto;border-radius:28px;background:var(--yellow);padding:42px;display:flex;justify-content:space-between;align-items:center;gap:28px}
-    .cta h2{font-size:clamp(2rem,4vw,3rem);margin:0;letter-spacing:-.04em}
-    .cta p{margin:8px 0 0;color:#514d25;max-width:620px}
-    .cta .button{background:#242424;color:white}
-    footer{padding:34px 18px 46px;text-align:center;color:var(--muted);font-size:.84rem}
-    footer strong{color:var(--ink)}
-    .filter-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
-    .filter{border:1px solid var(--line);background:white;border-radius:999px;padding:9px 13px;font-weight:800;color:#4e5668;cursor:pointer}
-    .filter.active{background:var(--blue);color:white;border-color:var(--blue)}
-    @media (max-width:900px){nav{display:none}.hero{grid-template-columns:1fr}.module-grid,.material-grid{grid-template-columns:1fr 1fr}.two-col{grid-template-columns:1fr}.hero-copy{padding:38px}.section-head{align-items:start;flex-direction:column}.cta{align-items:flex-start;flex-direction:column}}
-    @media (max-width:620px){.nav{width:min(100% - 22px,1180px)}.brand small{display:none}.nav-cta{font-size:.8rem;padding:10px 12px}.hero,.section,.cta{width:min(100% - 22px,1180px)}.hero{margin-top:24px}.hero-copy,.hero-side{border-radius:22px}.hero-copy{padding:30px 24px}.module-grid,.material-grid{grid-template-columns:1fr}.section{margin:62px auto}.cta{margin:62px auto;padding:28px 24px}}
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Material de apoyo para capacitación de picking y operación de bodega.">
+<title>Capacitación Picking | Andrea Miranda</title>
+<style>
+:root{--yellow:#ffe600;--blue:#2d3277;--ink:#172033;--muted:#667085;--bg:#f6f7f9;--card:#fff;--line:#e7eaf0;--green:#16834f;--orange:#f28a18;--red:#d93838;--shadow:0 18px 50px rgba(26,34,56,.10)}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink);background:var(--bg);line-height:1.55}a{text-decoration:none;color:inherit}button{font:inherit}.topbar{background:var(--yellow);padding:9px 18px;text-align:center;font-size:.82rem;font-weight:900;letter-spacing:.04em}.header{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.94);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}.nav{width:min(1180px,calc(100% - 34px));margin:auto;min-height:72px;display:flex;align-items:center;justify-content:space-between;gap:20px}.brand{display:flex;align-items:center;gap:11px}.mark{width:42px;height:42px;border-radius:13px;display:grid;place-items:center;background:var(--blue);color:#fff;font-weight:950}.brand strong{display:block}.brand small{display:block;color:var(--muted);font-size:.73rem}.links{display:flex;gap:20px;font-size:.9rem;font-weight:800}.nav-btn{padding:10px 14px;border-radius:12px;background:var(--blue);color:#fff;font-size:.86rem;font-weight:900}.hero{width:min(1180px,calc(100% - 34px));margin:42px auto 20px;display:grid;grid-template-columns:1.1fr .9fr;gap:24px}.hero-main{padding:54px;border-radius:30px;background:linear-gradient(145deg,#1f255d,#39419a);color:#fff;box-shadow:var(--shadow);position:relative;overflow:hidden}.hero-main:after{content:"";position:absolute;width:330px;height:330px;border-radius:50%;background:var(--yellow);opacity:.12;right:-120px;top:-100px}.eyebrow{margin:0 0 14px;color:#fff19a;font-weight:950;font-size:.76rem;letter-spacing:.12em;text-transform:uppercase}.hero h1{font-size:clamp(2.7rem,6vw,5.4rem);line-height:.94;letter-spacing:-.055em;margin:0;max-width:800px}.lead{max-width:680px;color:#e3e6ff;font-size:1.04rem;margin:24px 0 28px}.actions{display:flex;gap:10px;flex-wrap:wrap}.btn{display:inline-flex;align-items:center;justify-content:center;padding:13px 18px;border-radius:14px;font-weight:950;border:0;cursor:pointer}.btn.primary{background:var(--yellow);color:#282828}.btn.secondary{border:1px solid rgba(255,255,255,.35);color:#fff;background:transparent}.hero-side{background:#fff;border-radius:30px;padding:28px;box-shadow:var(--shadow)}.hero-side h2{margin:0 0 16px;font-size:1.3rem}.route{display:grid;gap:10px}.route-item{display:flex;gap:12px;align-items:flex-start;padding:14px;border-radius:15px;background:#f8f9fb;border:1px solid var(--line)}.route-icon{width:35px;height:35px;border-radius:10px;background:#fff2a3;display:grid;place-items:center;flex:0 0 auto}.route-item strong{display:block;font-size:.93rem}.route-item small{display:block;color:var(--muted);margin-top:2px}.section{width:min(1180px,calc(100% - 34px));margin:82px auto}.section-head{display:flex;justify-content:space-between;align-items:end;gap:22px;margin-bottom:24px}.section-head .tag{margin:0 0 8px;color:var(--blue);font-size:.76rem;letter-spacing:.11em;text-transform:uppercase;font-weight:950}.section-head h2{margin:0;font-size:clamp(2rem,4vw,3.3rem);line-height:1;letter-spacing:-.04em}.section-head>p{max-width:520px;margin:0;color:var(--muted)}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:17px}.card{background:#fff;border:1px solid var(--line);border-radius:21px;padding:23px;box-shadow:0 8px 28px rgba(26,34,56,.05);transition:.2s}.card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}.num{width:42px;height:42px;border-radius:12px;background:var(--yellow);display:grid;place-items:center;font-weight:950;margin-bottom:20px}.card h3{margin:0 0 8px;font-size:1.12rem}.card p{margin:0 0 17px;color:var(--muted);font-size:.92rem}.module-link{padding:0;border:0;background:none;color:var(--blue);font-weight:950;font-size:.88rem;cursor:pointer}.priority-legend{display:flex;gap:7px;flex-wrap:wrap;margin:0 0 15px}.chip{display:inline-flex;align-items:center;gap:6px;padding:5px 8px;border:1px solid var(--line);border-radius:999px;background:#fafafa;font-size:.73rem;font-weight:850}.dot{width:8px;height:8px;border-radius:50%}.dot.red{background:var(--red)}.dot.orange{background:var(--orange)}.dot.green{background:var(--green)}.two{display:grid;grid-template-columns:1fr 1fr;gap:20px}.panel{background:#fff;border:1px solid var(--line);border-radius:22px;padding:27px}.panel h3{margin:0 0 15px;font-size:1.3rem}.list{display:grid;gap:11px}.row{display:flex;gap:12px;padding:13px 14px;border-radius:14px;background:#f8f9fb}.row b{color:var(--green)}.row span{font-size:.93rem;color:#444c5e}.mistake{display:grid;grid-template-columns:auto 1fr;gap:12px;padding:14px;border-radius:14px;border:1px solid #f0dddd;background:#fffafa}.mistake strong{color:#b64040}.library{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.file{background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px;min-height:176px;display:flex;flex-direction:column}.filetype{color:var(--blue);font-size:.73rem;letter-spacing:.1em;text-transform:uppercase;font-weight:950}.file h3{margin:11px 0 7px}.file p{margin:0 0 17px;color:var(--muted);font-size:.9rem}.file a{margin-top:auto;color:var(--blue);font-weight:950}.disclaimer{margin-top:20px;padding:16px 18px;border-radius:15px;background:#fff9cf;border:1px solid #efdf73;color:#5e561d;font-size:.89rem}.footer-cta{width:min(1180px,calc(100% - 34px));margin:82px auto;padding:38px;border-radius:28px;background:var(--yellow);display:flex;align-items:center;justify-content:space-between;gap:25px}.footer-cta h2{margin:0;font-size:clamp(2rem,4vw,3rem);letter-spacing:-.04em}.footer-cta p{margin:7px 0 0;color:#575226;max-width:650px}.footer-cta .btn{background:#252525;color:#fff}footer{text-align:center;color:var(--muted);font-size:.83rem;padding:0 18px 42px}footer strong{color:var(--ink)}
+/* CPT modal */
+dialog{border:0;padding:0;background:transparent;max-width:none;max-height:none}dialog::backdrop{background:rgba(13,19,38,.68);backdrop-filter:blur(5px)}.cpt-modal{width:min(1040px,calc(100vw - 30px));max-height:calc(100vh - 30px);overflow:auto;background:#fff;border-radius:26px;box-shadow:0 28px 90px rgba(0,0,0,.3)}.cpt-top{position:sticky;top:0;z-index:3;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:20px 24px;background:#fff;border-bottom:1px solid var(--line)}.cpt-top strong{font-size:1.05rem}.close{border:0;background:#f0f2f6;border-radius:12px;padding:9px 12px;font-weight:900;cursor:pointer}.cpt-body{padding:30px}.cpt-kicker{font-size:.77rem;font-weight:950;letter-spacing:.11em;text-transform:uppercase;color:var(--blue);margin:0 0 8px}.cpt-body h2{font-size:clamp(2rem,5vw,3.6rem);line-height:1;letter-spacing:-.045em;margin:0 0 12px}.cpt-intro{font-size:1.03rem;color:var(--muted);max-width:760px;margin:0 0 28px}.steps{display:grid;gap:18px}.step{display:grid;grid-template-columns:58px 1fr;gap:16px;padding:20px;border:1px solid var(--line);border-radius:20px;background:#fafbfc}.step-no{width:48px;height:48px;border-radius:14px;background:var(--yellow);display:grid;place-items:center;font-weight:950;font-size:1.15rem}.step h3{margin:1px 0 6px}.step p{margin:0;color:var(--muted)}.menu-demo{display:grid;grid-template-columns:280px 1fr;gap:24px;align-items:center;margin-top:16px}.menu-demo img{width:100%;display:block;border-radius:18px}.instruction{padding:18px;border-radius:16px;background:#fff;border:1px solid var(--line)}.instruction strong{color:var(--blue)}.color-title{margin:34px 0 8px;font-size:1.55rem}.color-lead{margin:0 0 18px;color:var(--muted)}.examples{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.example{border:1px solid var(--line);border-radius:20px;overflow:hidden;background:#fff}.example img{width:100%;display:block;background:#050505}.example-copy{padding:15px}.example-copy strong{display:block;margin-bottom:4px}.example-copy p{margin:0;color:var(--muted);font-size:.88rem}.example.red{border-top:6px solid var(--red)}.example.orange{border-top:6px solid var(--orange)}.example.green{border-top:6px solid var(--green)}.rule{margin-top:22px;padding:18px 20px;border-radius:16px;background:#fff7b8;border:1px solid #e6d14d;font-weight:800}.rule .red-t{color:var(--red)}.rule .orange-t{color:#d66c00}.rule .green-t{color:var(--green)}.cpt-note{margin-top:15px;color:var(--muted);font-size:.85rem}.bottom-close{margin-top:24px;display:flex;justify-content:flex-end}.bottom-close .btn{background:var(--blue);color:#fff}
+@media(max-width:900px){.links{display:none}.hero{grid-template-columns:1fr}.grid,.library{grid-template-columns:1fr 1fr}.two{grid-template-columns:1fr}.section-head{align-items:flex-start;flex-direction:column}.footer-cta{flex-direction:column;align-items:flex-start}.hero-main{padding:38px}.menu-demo{grid-template-columns:220px 1fr}.examples{grid-template-columns:1fr 1fr}}
+@media(max-width:620px){.nav,.hero,.section,.footer-cta{width:min(100% - 22px,1180px)}.brand small{display:none}.hero{margin-top:24px}.hero-main,.hero-side{border-radius:22px}.hero-main{padding:30px 24px}.grid,.library{grid-template-columns:1fr}.section{margin:60px auto}.footer-cta{margin:60px auto;padding:28px 24px}.nav-btn{font-size:.78rem}.cpt-modal{width:100vw;max-height:100vh;border-radius:0}.cpt-body{padding:22px 16px 32px}.cpt-top{padding:15px 16px}.menu-demo{grid-template-columns:1fr}.menu-demo img{max-width:280px;margin:auto}.examples{grid-template-columns:1fr}.step{grid-template-columns:46px 1fr;padding:16px}.step-no{width:40px;height:40px}.example img{max-height:470px;object-fit:contain}}
+</style>
 </head>
 <body>
-  <div class="topbar">MAQUETA PERSONAL · CAPACITACIÓN DE PICKING · NO OFICIAL</div>
-  <header><div class="nav"><a class="brand" href="#inicio"><span class="brand-mark">AM</span><span><strong>Andrea Miranda</strong><small>Material de capacitación</small></span></a><nav><a href="#modulos">Módulos</a><a href="#guia">Guía rápida</a><a href="#materiales">Materiales</a></nav><a class="nav-cta" href="#materiales">Ver material</a></div></header>
-  <main id="inicio">
-    <section class="hero"><div class="hero-copy"><p class="eyebrow">Picking · operación · calidad</p><h1>Aprender el proceso, paso a paso.</h1><p class="lead">Un espacio simple para reunir procedimientos, guías visuales, material de apoyo y buenas prácticas para capacitación de picking.</p><div class="hero-actions"><a class="button primary" href="#modulos">Comenzar capacitación</a><a class="button secondary" href="#guia">Ver guía rápida</a></div></div><aside class="hero-side"><h2>Ruta de aprendizaje</h2><div class="progress-card"><div class="progress-head"><span>Contenido preparado</span><strong>35%</strong></div><div class="progress-track"><span></span></div></div><div class="mini-list"><div class="mini-item"><div class="mini-icon">📍</div><div><strong>Ubicación y lectura</strong><small>Pasillo, módulo, nivel y posición.</small></div></div><div class="mini-item"><div class="mini-icon">📱</div><div><strong>Escaneo correcto</strong><small>Validación de producto y ubicación.</small></div></div><div class="mini-item"><div class="mini-icon">✅</div><div><strong>Calidad</strong><small>Evitar errores antes de confirmar.</small></div></div></div></aside></section>
-    <section class="section" id="modulos"><div class="section-head"><div><p class="tag">Capacitación</p><h2>Módulos principales</h2></div><p>La idea es que cada módulo pueda tener texto, imágenes, videos cortos, PDFs y preguntas de repaso.</p></div><div class="module-grid"><article class="module"><div class="module-num">01</div><h3>Introducción al picking</h3><p>Objetivo del proceso, flujo general y conceptos básicos antes de comenzar.</p><a href="#">Abrir módulo →</a></article><article class="module"><div class="module-num">02</div><h3>Ubicaciones</h3><p>Cómo interpretar calle/pasillo, módulo, nivel y posición de forma rápida.</p><a href="#">Abrir módulo →</a></article><article class="module"><div class="module-num">03</div><h3>Escaneo y validación</h3><p>Secuencia de lectura, verificación y confirmación para reducir errores.</p><a href="#">Abrir módulo →</a></article><article class="module"><div class="module-num">04</div><h3>Picking Single</h3><p>Flujo de una tarea individual con foco en orden, seguridad y exactitud.</p><a href="#">Abrir módulo →</a></article><article class="module"><div class="module-num">05</div><h3>Picking Multibatch</h3><p>Organización de múltiples pedidos y control para evitar mezclas.</p><a href="#">Abrir módulo →</a></article><article class="module"><div class="module-num">06</div><h3>CPT · Pedidos prioritarios</h3><p>Son pedidos que deben completarse con la mayor rapidez posible. Para identificarlos, entra en <strong>Consultar</strong>, bipea el pedido y revisa la fecha límite. Si aparece en rojo o naranjo, corresponde a un CPT y debe priorizarse. Si aparece en verde, el pedido no es urgente.</p><div class="priority-legend"><span class="priority-chip"><i class="priority-dot red"></i> Rojo · urgente</span><span class="priority-chip"><i class="priority-dot orange"></i> Naranjo · urgente</span><span class="priority-chip"><i class="priority-dot green"></i> Verde · no urgente</span></div><a href="#">Abrir módulo →</a></article><article class="module"><div class="module-num">07</div><h3>Calidad y productividad</h3><p>Buenas prácticas para trabajar rápido sin sacrificar la precisión del proceso.</p><a href="#">Abrir módulo →</a></article></div></section>
-    <section class="section" id="guia"><div class="section-head"><div><p class="tag">Guía rápida</p><h2>Antes de confirmar un pick</h2></div><p>Esta sección puede funcionar como recordatorio breve para personas nuevas durante sus primeros días.</p></div><div class="two-col"><article class="panel"><h3>Checklist</h3><div class="checklist"><div class="check"><b>✓</b><span>Confirmar que estás en la ubicación indicada por el dispositivo.</span></div><div class="check"><b>✓</b><span>Comparar visualmente el producto antes de escanear.</span></div><div class="check"><b>✓</b><span>Revisar código, variante y cantidad solicitada.</span></div><div class="check"><b>✓</b><span>Mantener separados los pedidos cuando corresponde.</span></div><div class="check"><b>✓</b><span>Confirmar sólo cuando el producto correcto esté físicamente tomado.</span></div></div></article><article class="panel"><h3>Errores que queremos evitar</h3><div class="mistakes"><div class="mistake"><strong>01</strong><span>Escanear una ubicación cercana sin revisar la posición exacta.</span></div><div class="mistake"><strong>02</strong><span>Tomar una variante parecida por color, tamaño o presentación.</span></div><div class="mistake"><strong>03</strong><span>Confirmar en pantalla antes de tener el producto correcto.</span></div><div class="mistake"><strong>04</strong><span>Priorizar velocidad cuando existe una duda de calidad.</span></div></div></article></div></section>
-    <section class="section" id="materiales"><div class="section-head"><div><p class="tag">Biblioteca</p><h2>Material descargable</h2></div><p>Estos son ejemplos. Después podemos reemplazarlos por tus manuales, fotos, presentaciones o PDFs reales.</p></div><div class="filter-row"><button class="filter active" data-filter="all">Todo</button><button class="filter" data-filter="pdf">PDF</button><button class="filter" data-filter="visual">Guías visuales</button><button class="filter" data-filter="repaso">Repaso</button></div><div class="material-grid" id="material-grid"><article class="material" data-type="pdf"><span class="filetype">PDF</span><h3>Manual básico de picking</h3><p>Documento principal para explicar el flujo completo.</p><a href="#">Próximamente</a></article><article class="material" data-type="visual"><span class="filetype">Guía visual</span><h3>Cómo leer una ubicación</h3><p>Ejemplos gráficos con pasillo, módulo, nivel y posición.</p><a href="#">Próximamente</a></article><article class="material" data-type="repaso"><span class="filetype">Repaso</span><h3>Mini prueba: 5 preguntas</h3><p>Chequeo rápido de comprensión al terminar el módulo.</p><a href="#">Próximamente</a></article></div><div class="notice"><strong>Nota:</strong> esta maqueta está planteada como material de apoyo independiente. Antes de publicar documentos internos, procedimientos confidenciales, capturas de sistemas o información operativa sensible, conviene revisar qué material está autorizado para compartirse públicamente.</div></section>
-    <section class="cta"><div><h2>Esta es sólo la primera versión.</h2><p>Podemos transformarla en una plataforma más completa: buscador, módulos separados, videos, evaluaciones, certificados, acceso por contraseña o biblioteca de archivos.</p></div><a class="button" href="#modulos">Volver a módulos</a></section>
-  </main>
-  <footer><strong>Andrea Miranda · Capacitación de Picking</strong><br>Maqueta inicial para organizar material de aprendizaje.</footer>
-  <script>
-    const filters=document.querySelectorAll('.filter');const materials=document.querySelectorAll('.material');filters.forEach(btn=>{btn.addEventListener('click',()=>{filters.forEach(b=>b.classList.remove('active'));btn.classList.add('active');const type=btn.dataset.filter;materials.forEach(card=>{card.style.display=(type==='all'||card.dataset.type===type)?'flex':'none';});});});
-  </script>
+<div class="topbar">MAQUETA PERSONAL · CAPACITACIÓN DE PICKING · NO OFICIAL</div>
+<header class="header"><div class="nav"><a class="brand" href="#inicio"><span class="mark">AM</span><span><strong>Andrea Miranda</strong><small>Material de capacitación</small></span></a><nav class="links"><a href="#modulos">Módulos</a><a href="#guia">Guía rápida</a><a href="#materiales">Materiales</a></nav><a class="nav-btn" href="#modulos">Comenzar</a></div></header>
+<main id="inicio">
+<section class="hero"><div class="hero-main"><p class="eyebrow">Picking · operación · calidad</p><h1>Aprender el proceso, paso a paso.</h1><p class="lead">Un espacio simple para reunir procedimientos, guías visuales, material de apoyo y buenas prácticas para capacitación de picking.</p><div class="actions"><a class="btn primary" href="#modulos">Ver módulos</a><a class="btn secondary" href="#guia">Guía rápida</a></div></div><aside class="hero-side"><h2>Ruta de aprendizaje</h2><div class="route"><div class="route-item"><div class="route-icon">📍</div><div><strong>Ubicación</strong><small>Pasillo, módulo, nivel y posición.</small></div></div><div class="route-item"><div class="route-icon">📱</div><div><strong>Escaneo</strong><small>Validación correcta antes de confirmar.</small></div></div><div class="route-item"><div class="route-icon">📦</div><div><strong>Single y Multibatch</strong><small>Orden y separación de pedidos.</small></div></div><div class="route-item"><div class="route-icon">✅</div><div><strong>Calidad</strong><small>Velocidad con precisión.</small></div></div></div></aside></section>
+<section class="section" id="modulos"><div class="section-head"><div><p class="tag">Capacitación</p><h2>Módulos principales</h2></div><p>Cada módulo puede ampliarse con imágenes, explicaciones y material de repaso.</p></div><div class="grid">
+<article class="card"><div class="num">01</div><h3>Introducción al picking</h3><p>Objetivo del proceso, flujo general y conceptos básicos antes de comenzar.</p><button class="module-link">Abrir módulo →</button></article>
+<article class="card"><div class="num">02</div><h3>Ubicaciones</h3><p>Cómo interpretar calle/pasillo, módulo, nivel y posición de forma rápida.</p><button class="module-link">Abrir módulo →</button></article>
+<article class="card"><div class="num">03</div><h3>Escaneo y validación</h3><p>Secuencia de lectura, verificación y confirmación para reducir errores.</p><button class="module-link">Abrir módulo →</button></article>
+<article class="card"><div class="num">04</div><h3>Picking Single</h3><p>Flujo de una tarea individual con foco en orden, seguridad y exactitud.</p><button class="module-link">Abrir módulo →</button></article>
+<article class="card"><div class="num">05</div><h3>Picking Multibatch</h3><p>Organización de múltiples pedidos y control para evitar mezclas.</p><button class="module-link">Abrir módulo →</button></article>
+<article class="card"><div class="num">06</div><h3>CPT · Pedidos prioritarios</h3><p>Pedidos que deben terminar de pickearse lo más rápido posible. Se identifican desde <strong>Consultar</strong> revisando el color de la fecha límite.</p><div class="priority-legend"><span class="chip"><i class="dot red"></i>Rojo</span><span class="chip"><i class="dot orange"></i>Naranjo</span><span class="chip"><i class="dot green"></i>Verde</span></div><button class="module-link" onclick="openCPT()">Más información →</button></article>
+<article class="card"><div class="num">07</div><h3>Calidad y productividad</h3><p>Buenas prácticas para trabajar rápido sin sacrificar la precisión del proceso.</p><button class="module-link">Abrir módulo →</button></article>
+</div></section>
+<section class="section" id="guia"><div class="section-head"><div><p class="tag">Guía rápida</p><h2>Antes de confirmar un pick</h2></div><p>Un recordatorio corto para revisar durante los primeros días de capacitación.</p></div><div class="two"><article class="panel"><h3>Checklist</h3><div class="list"><div class="row"><b>✓</b><span>Confirmar que estás en la ubicación indicada.</span></div><div class="row"><b>✓</b><span>Comparar visualmente el producto antes de escanear.</span></div><div class="row"><b>✓</b><span>Revisar código, variante y cantidad solicitada.</span></div><div class="row"><b>✓</b><span>Mantener separados los pedidos cuando corresponda.</span></div><div class="row"><b>✓</b><span>Confirmar sólo cuando el producto correcto esté tomado.</span></div></div></article><article class="panel"><h3>Errores comunes</h3><div class="list"><div class="mistake"><strong>01</strong><span>Escanear una ubicación cercana sin revisar la posición exacta.</span></div><div class="mistake"><strong>02</strong><span>Tomar una variante parecida por color, tamaño o presentación.</span></div><div class="mistake"><strong>03</strong><span>Confirmar en pantalla antes de tener físicamente el producto correcto.</span></div><div class="mistake"><strong>04</strong><span>Priorizar velocidad cuando todavía existe una duda de calidad.</span></div></div></article></div></section>
+<section class="section" id="materiales"><div class="section-head"><div><p class="tag">Biblioteca</p><h2>Materiales</h2></div><p>Espacios preparados para ir agregando documentos y recursos de capacitación.</p></div><div class="library"><article class="file"><span class="filetype">PDF</span><h3>Manual básico de picking</h3><p>Documento central para explicar el flujo completo.</p><a href="#">Próximamente</a></article><article class="file"><span class="filetype">Guía visual</span><h3>Cómo leer una ubicación</h3><p>Ejemplos gráficos de pasillo, módulo, nivel y posición.</p><a href="#">Próximamente</a></article><article class="file"><span class="filetype">Repaso</span><h3>Mini prueba</h3><p>Preguntas rápidas para revisar comprensión al terminar un módulo.</p><a href="#">Próximamente</a></article></div><div class="disclaimer"><strong>Importante:</strong> antes de publicar capturas de sistemas, manuales internos, procedimientos confidenciales o información operativa de una empresa, verifica que su difusión pública esté autorizada.</div></section>
+<section class="footer-cta"><div><h2>Seguimos construyendo.</h2><p>La página puede crecer con nuevos módulos, imágenes, cuestionarios y documentos.</p></div><a class="btn" href="#modulos">Volver a módulos</a></section>
+</main>
+<footer><strong>Andrea Miranda · Capacitación de Picking</strong><br>Sitio personal de apoyo educativo. No oficial.</footer>
+
+<dialog id="cptDialog"><div class="cpt-modal"><div class="cpt-top"><strong>Módulo 06 · CPT</strong><button class="close" onclick="closeCPT()">✕ Cerrar</button></div><div class="cpt-body"><p class="cpt-kicker">Pedidos prioritarios</p><h2>¿Cómo identificar un CPT?</h2><p class="cpt-intro">Un pedido CPT debe terminar de pickearse lo más rápido posible. Para saber si un pedido es prioritario, primero hay que consultarlo en la handheld y revisar el color de la fecha límite.</p>
+<div class="steps">
+<div class="step"><div class="step-no">1</div><div><h3>Ingresa a “Consultar”</h3><p>En la pantalla principal de la handheld selecciona la opción <strong>CONSULTAR</strong>.</p><div class="menu-demo"><img src="assets/cpt-menu.svg" alt="Handheld con las opciones Recolectar, Consultar y Reportar"><div class="instruction"><strong>Busca el botón CONSULTAR.</strong><br>Esta opción permite revisar la información del pedido antes de continuar.</div></div></div></div>
+<div class="step"><div class="step-no">2</div><div><h3>Bipea o escanea el pedido</h3><p>Con la opción <strong>Consultar</strong> abierta, bipea el pedido para que la handheld muestre su información.</p></div></div>
+<div class="step"><div class="step-no">3</div><div><h3>Revisa la fecha que aparece en pantalla</h3><p>Fíjate principalmente en la <strong>fecha límite</strong> y en el color con el que aparece. Ese color indica si el pedido debe priorizarse.</p></div></div>
+</div>
+<h3 class="color-title">Cómo interpretar el color</h3><p class="color-lead">La información inferior de los ejemplos está difuminada a propósito: lo importante para esta explicación es el color de la fecha.</p>
+<div class="examples">
+<article class="example red"><img src="assets/cpt-rojo.svg" alt="Ejemplo de handheld con fecha en rojo"><div class="example-copy"><strong>🔴 Rojo · CPT</strong><p>Es un pedido urgente. Debe priorizarse y terminarse lo antes posible.</p></div></article>
+<article class="example orange"><img src="assets/cpt-naranjo.svg" alt="Ejemplo de handheld con fecha en naranjo"><div class="example-copy"><strong>🟠 Naranjo · CPT</strong><p>También corresponde a un pedido prioritario. Debe avanzarse con rapidez.</p></div></article>
+<article class="example green"><img src="assets/cpt-verde.svg" alt="Ejemplo de handheld con fecha en verde"><div class="example-copy"><strong>🟢 Verde · No urgente</strong><p>El pedido no está en condición urgente y puede seguir el flujo normal.</p></div></article>
+</div>
+<div class="rule">💡 <strong>Regla clave:</strong> si la fecha aparece en <span class="red-t">rojo</span> o <span class="orange-t">naranjo</span>, el pedido es <strong>CPT y debe priorizarse</strong>. Si aparece en <span class="green-t">verde</span>, no es urgente.</div>
+<p class="cpt-note">Las pantallas mostradas son recreaciones visuales para capacitación y la información secundaria aparece difuminada.</p><div class="bottom-close"><button class="btn" onclick="closeCPT()">Entendido · cerrar</button></div></div></div></dialog>
+<script>
+function openCPT(){document.getElementById('cptDialog').showModal();document.body.style.overflow='hidden'}
+function closeCPT(){document.getElementById('cptDialog').close();document.body.style.overflow=''}
+document.getElementById('cptDialog').addEventListener('click',e=>{if(e.target.id==='cptDialog')closeCPT()});
+</script>
 </body>
 </html>
